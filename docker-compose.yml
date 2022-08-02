@@ -1,0 +1,21 @@
+version: "3"
+services:
+  postgre:
+    container_name: wemo_postgis
+    image: postgis/postgis:14-3.2-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=$DB_USER
+      - POSTGRES_PASSWORD=$DB_PASSWORD
+      - TZ=$TZ
+      - PGTZ=$PGTZ
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 5432:5432
+    networks:
+      - devops
+
+networks:
+  devops:
+    external: true
