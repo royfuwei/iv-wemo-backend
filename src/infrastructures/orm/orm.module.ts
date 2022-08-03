@@ -9,6 +9,9 @@ import {
   DB_SYNC,
 } from '../../constants';
 import { join } from 'path';
+import { ScooterEntity } from 'src/core/scooters/entities/ScooterEntity';
+import { ScooterMileageEntity } from '../../core/scooters-mileage/entities/ScooterMileageEntity';
+import { ScooterReplyEntity } from '../../core/scooters-reply/entities/ScooterReplyEntity';
 
 @Module({
   imports: [
@@ -19,7 +22,12 @@ import { join } from 'path';
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-      entities: [join(__dirname, '../../core/**/entities/*{.ts,.js}')],
+      entities: [
+        ScooterEntity,
+        ScooterMileageEntity,
+        ScooterReplyEntity,
+        // join(__dirname, '../../core/**/entities/*{.ts,.js}')
+      ],
       synchronize: DB_SYNC,
     }),
   ],
