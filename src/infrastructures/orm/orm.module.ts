@@ -8,6 +8,7 @@ import {
   DB_NAME,
   DB_SYNC,
 } from '../../constants';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import {
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
-      entities: [],
+      entities: [join(__dirname, '../../core/**/entities/*{.ts,.js}')],
       synchronize: DB_SYNC,
     }),
   ],
