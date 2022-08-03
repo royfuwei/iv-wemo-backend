@@ -46,10 +46,6 @@ export enum LicenseType {
   LEVEL5 = 'LEVEL5',
 }
 
-/**
- * 命名部分參考
- * https://schema.gov.tw/Motor%20Vehicle%20and%20Driver/Motor%20Vehicle%20and%20Driver/Vehicle%20Registration
- */
 @Entity({
   name: 'ScooterEntity',
 })
@@ -71,10 +67,11 @@ export class ScooterEntity {
     default: LicenseType.LEVEL3,
     comment: '牌照類型',
   })
-  licenseType: string;
+  licenseType: LicenseType;
 
   @Column({
     comment: '牌照號碼',
+    unique: true,
   })
   licenseNumber: string;
 
