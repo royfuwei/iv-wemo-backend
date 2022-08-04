@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import _ = require('lodash');
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { OrmFindAndCount } from 'src/infrastructures/orm/util';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { ScooterEntity } from './entities/ScooterEntity';
 import { ScooterDataDTO } from './dto/scooter.dto';
 
@@ -12,8 +13,10 @@ export class ScootersRepo {
     private readonly scooterRepo: Repository<ScooterEntity>,
   ) {}
 
-  async findAll(): Promise<OrmFindAndCount<ScooterEntity>> {
-    const [items, count] = await this.scooterRepo.findAndCount();
+  async findByOptions(
+    options?: FindManyOptions<ScooterEntity>,
+  ): Promise<OrmFindAndCount<ScooterEntity>> {
+    const [items, count] = await this.scooterRepo.findAndCount(options);
     return { items, count };
   }
 
@@ -21,6 +24,9 @@ export class ScootersRepo {
     const result = await this.scooterRepo.findOne({
       where: { id },
     });
+    if (_.isNull(result)) {
+      throw new NotFoundException(`id: ${id} is not existed!!`);
+    }
     return result;
   }
 
