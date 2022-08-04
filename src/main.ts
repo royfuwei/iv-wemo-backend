@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ServerRootModule } from './infrastructures/server/di/RootModule';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { PORT, APP_NAME } from './constants';
-import { INestApplication, Logger } from '@nestjs/common';
+import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 
 const initLogger = new Logger('MainInitialApp');
 
@@ -18,6 +18,7 @@ const genSwaggerDocument = (app: INestApplication): void => {
 
 async function bootstrap() {
   const app = await NestFactory.create(ServerRootModule);
+  app.useGlobalPipes(new ValidationPipe());
   genSwaggerDocument(app);
   await app.listen(PORT);
   initLogger.log(`App is running at http://localhost:${PORT}`);
