@@ -48,12 +48,13 @@ export class ScootersMileageRepo {
   }
 
   async updateById(id: string, data: ReqUpdateMileageDTO) {
-    const result = await this.scooterMileageRepo.update({ id }, data);
+    await this.findById(id);
+    await this.scooterMileageRepo.update({ id }, data);
     return this.findById(id);
   }
 
   async deleteById(id: string) {
     const result = await this.scooterMileageRepo.delete({ id });
-    return result;
+    return result.affected > 0;
   }
 }

@@ -55,7 +55,6 @@ export class ScootersRepo {
 
   async deleteById(id: string) {
     const result = await this.scooterRepo.delete({ id });
-    console.log('result: ', result);
     return result.affected > 0;
   }
 }

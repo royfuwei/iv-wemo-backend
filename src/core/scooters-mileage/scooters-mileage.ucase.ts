@@ -24,6 +24,6 @@ export class ScootersMileageUseCase {
 
   async deleteById(id: string) {
     const result = await this.scootersMileageRepo.deleteById(id);
-    return result.raw > 0;
+    return result;
   }
 }
