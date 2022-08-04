@@ -1,5 +1,9 @@
 import _ = require('lodash');
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { OrmFindAndCount } from 'src/infrastructures/orm/util';
 import { FindManyOptions, Repository } from 'typeorm';
@@ -31,17 +35,27 @@ export class ScootersRepo {
   }
 
   async create(data: ScooterDataDTO): Promise<ScooterEntity> {
+    const licenseNumber = data.licenseNumber;
+    const scooter = await this.findByOptions({
+      where: { licenseNumber },
+    });
+    if (scooter.count > 0)
+      throw new ConflictException(
+        `licenseNumber: ${licenseNumber} is existed!!`,
+      );
     const result = await this.scooterRepo.save(data);
     return result;
   }
 
   async updateById(id: string, data: ScooterDataDTO) {
-    const result = await this.scooterRepo.update({ id }, data);
-    return result;
+    await this.findById(id);
+    await this.scooterRepo.update({ id }, data);
+    return this.findById(id);
   }
 
   async deleteById(id: string) {
     const result = await this.scooterRepo.delete({ id });
-    return result;
+    console.log('result: ', result);
+    return result.affected > 0;
   }
 }

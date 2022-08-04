@@ -27,7 +27,7 @@ export class ScooterMileageEntity {
   scooterId: string;
 
   @ManyToOne(() => ScooterEntity, (scooter) => scooter.id, {
-    onDelete: 'NO ACTION',
+    onDelete: 'CASCADE',
   })
   scooter: ScooterEntity;
 
