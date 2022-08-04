@@ -36,6 +36,7 @@ export class ScooterMileageEntity {
   mileage: number;
 
   @Column({
+    type: 'float',
     comment: '油箱/電量 百分比',
   })
   energyRate: number;

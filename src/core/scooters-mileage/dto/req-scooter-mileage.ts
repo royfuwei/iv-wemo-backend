@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsUUID, IsArray, IsOptional, IsString } from 'class-validator';
+import { ScooterMileageDataDTO } from './scooter-mileage.dto';
 
 export class ReqGetMileageQuery {
   @ApiProperty({
@@ -15,3 +16,6 @@ export class ReqGetMileageQuery {
   @IsOptional()
   readonly postIds?: string[];
 }
+
+export class ReqCreateMileageDTO extends ScooterMileageDataDTO {}
+export class ReqUpdateMileageDTO extends ScooterMileageDataDTO {}
