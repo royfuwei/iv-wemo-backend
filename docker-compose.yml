@@ -1,5 +1,16 @@
 version: "3"
 services:
+  api:
+    build:
+      context: .
+    container_name: wemo_api
+    restart: always
+    depends_on:
+      - postgre
+    # ports:
+    #   - 3000:3000
+    networks:
+      - devops
   postgre:
     container_name: wemo_postgis
     image: postgis/postgis:14-3.2-alpine
