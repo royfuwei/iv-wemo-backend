@@ -66,6 +66,9 @@ export class ScootersContrller {
   }
 
   /* mileage */
+  @ApiOperation({
+    summary: '新增摩托車里程資訊',
+  })
   @HttpCode(HttpStatus.CREATED)
   @ApiCreatedResponse({ type: ResScooterMileageDTO })
   @Post('/:id/mileage')

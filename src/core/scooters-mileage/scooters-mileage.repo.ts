@@ -42,6 +42,7 @@ export class ScootersMileageRepo {
     entity.energyRate = data.energyRate;
     entity.mileage = data.mileage;
     entity.scooterId = scooter.id;
+    entity.location = data.location;
     const result = await this.scooterMileageRepo.save(entity);
     return result;
   }

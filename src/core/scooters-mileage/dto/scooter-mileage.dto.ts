@@ -9,6 +9,7 @@ import {
   Max,
   Min,
 } from 'class-validator';
+import { GeoPointDTO } from 'src/infrastructures/dto/geopoint.dto';
 
 export class ScooterMileageDataDTO {
   @ApiProperty({
@@ -27,6 +28,12 @@ export class ScooterMileageDataDTO {
   @Max(1)
   @Type(() => Number)
   energyRate?: number;
+
+  @ApiProperty({
+    description: '紀錄座標',
+    example: new GeoPointDTO(),
+  })
+  location?: GeoPointDTO;
 }
 
 export class ScooterMileageDTO extends ScooterMileageDataDTO {

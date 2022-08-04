@@ -1,4 +1,5 @@
 import { ScooterEntity } from 'src/core/scooters/entities/ScooterEntity';
+import { GeoPointDTO } from 'src/infrastructures/dto/geopoint.dto';
 import {
   Column,
   CreateDateColumn,
@@ -49,7 +50,7 @@ export class ScooterMileageEntity {
     srid: 4326,
     comment: '定位',
   })
-  location: any;
+  location: GeoPointDTO;
 
   @CreateDateColumn()
   createAt: Date;

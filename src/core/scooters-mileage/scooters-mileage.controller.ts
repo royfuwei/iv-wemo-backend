@@ -30,6 +30,9 @@ export class ScootersMileageContrller {
     return this.scootersMileageUseCase.findByQuery();
   }
 
+  @ApiOperation({
+    summary: '更新摩托車里程資訊',
+  })
   @ApiOkResponse({ type: ResScooterMileageDTO })
   @Patch('/:id')
   async updateById(
